@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bangla Bank</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="login-page">
+        <h1>Welcome to Bangla Bank</h1>
+        <div id="login">
+            <h2>Login</h2>
+            <input type="text" placeholder="@Enter your gmail baby">
+            <input type="password" name="" id="" placeholder="$Enter your password baby">
+            <button id="log-btn">Login</button>
+        </div>
+    </div>
+
+    <div id="dashboard">
+        <div class="transaction-status">
+            <div class="deposit status">
+                <h2>Deposit</h2>
+                <h1 class="num">$ <span id="currentDeposit">00</span></h1>
+            </div>
+            <div class="withdraw status">
+                <h2>Withdraw</h2>
+                <h1 class="num">$ <span id="currentWithdraw">00</span></h1>
+            </div>
+            <div class="balance status">
+                <h2>Balance</h2>
+                <h1 class="num">$ <span id="currentBalance">1200</span></h1>
+            </div>
+        </div>
+        <div class="transaction">
+            <div class="tr">
+                <h2>Deposit</h2>
+                <input id="depositAmount" type="number" placeholder="$ amount you want to deposit">
+                <button id='depositBtn' class="tr-btn">Deposit</button>
+            </div>
+            <div class="tr">
+                <h2>Withdraw</h2>
+                <input id="withdrawAmount" type="number" placeholder="$ amount you want to withdraw">
+                <button id="withdrawBtn" class="tr-btn" >Withdraw</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('log-btn').addEventListener('click', function(event){
+            let loginPage = document.getElementById('login-page');
+            loginPage.style.display ='none';
+            let dashboard =document.getElementById('dashboard');
+            dashboard.style.visibility = 'visible'
+        })
+
+        //deposit button event handler
+        document.getElementById('depositBtn').addEventListener('click', function(){
+            const depositNum = inputNum('depositAmount')
+            update('currentDeposit', depositNum);
+            update('currentBalance', depositNum)
+            document.getElementById('depositAmount').value = ''
+
+        })
+
+        //withdraw button handler
+
+        document.getElementById('withdrawBtn').addEventListener('click', function(){
+            const withdrawNum =inputNum('withdrawAmount')
+            update('currentWithdraw', withdrawNum)
+            update('currentBalance', -1 *withdrawNum)
+            document.getElementById('withdrawAmount').value = '';
+
+        })
+
+        function inputNum(id){
+            const Amount = document.getElementById(id).value;
+            const Num = parseFloat(Amount);
+            return Num;
+        }
+        function update(id, depositNum){
+            const currentDeposit = document.getElementById(id).innerText;
+            const currentNum = parseFloat(currentDeposit);
+            const total = depositNum + currentNum;
+            document.getElementById(id).innerText = total;
+
+        }
+    </script>
+</body>
+</html>
